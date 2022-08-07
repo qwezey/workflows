@@ -1,0 +1,17 @@
+on:
+  repository_dispatch:
+    types:
+      - lease-tracker-on-push
+jobs:
+  build-and-deploy-testflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: qwezey/workflows
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3"
+          working-directory: ios
+      - uses: ./.github/actions/build-and-deploy-testflight
