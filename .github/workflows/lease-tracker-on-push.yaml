@@ -23,3 +23,4 @@ jobs:
       - uses: ./.github/actions/build-and-deploy-testflight
         env:
           MATCH_GIT_PRIVATE_KEY: ${{secrets.QWEZEY_BOT_PRIVATE_KEY}}
+          MATCH_PASSWORD: ${{secrets.LEASE_TRACKER_MATCH_PASSWORD}}
