@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: qwezey/workflows
+          repository: qwezey/lease-tracker
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
       - uses: ruby/setup-ruby@v1
         with:
