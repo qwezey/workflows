@@ -45,6 +45,6 @@ jobs:
           channel: "stable"
       - uses: ./.github/action
         with:
-          workflow: build-and-deploy-android-beta
+          workflow: build-and-deploy-playstore-beta
         env:
           SUPPLY_JSON_KEY_DATA: ${{secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
