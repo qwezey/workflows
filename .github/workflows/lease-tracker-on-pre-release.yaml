@@ -1,7 +1,7 @@
 on:
   repository_dispatch:
     types:
-      - lease-tracker-on-create-pre-release
+      - lease-tracker-on-pre-release
 jobs:
   build-and-deploy-testflight:
     runs-on: macos-latest
@@ -26,4 +26,25 @@ jobs:
         env:
           MATCH_GIT_PRIVATE_KEY: ${{secrets.QWEZEY_BOT_PRIVATE_KEY}}
           MATCH_PASSWORD: ${{secrets.LEASE_TRACKER_MATCH_PASSWORD}}
+  build-and-deploy-playstore-beta:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: qwezey/lease-tracker
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: ${{github.event.client_payload.ref}}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3"
+          working-directory: android
+          bundler-cache: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.0.5"
+          channel: "stable"
+      - uses: ./.github/action
+        with:
+          workflow: build-and-deploy-android-beta
+        env:
           SUPPLY_JSON_KEY_DATA: ${{secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
