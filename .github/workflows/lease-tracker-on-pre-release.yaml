@@ -26,6 +26,7 @@ jobs:
         env:
           MATCH_GIT_PRIVATE_KEY: ${{secrets.QWEZEY_BOT_PRIVATE_KEY}}
           MATCH_PASSWORD: ${{secrets.LEASE_TRACKER_MATCH_PASSWORD}}
+          APP_STORE_CONNECT_API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY}}
   build-and-deploy-playstore-beta:
     runs-on: ubuntu-latest
     steps:
