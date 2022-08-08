@@ -10,7 +10,7 @@ jobs:
         with:
           repository: qwezey/lease-tracker
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
-          ref: test
+          ref: ${{github.event.client_payload.ref}}
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3"
