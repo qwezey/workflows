@@ -1,7 +1,7 @@
 on:
   repository_dispatch:
     types:
-      - lease-tracker-on-push
+      - lease-tracker-on-create-pre-release
 jobs:
   build-and-deploy-testflight:
     runs-on: macos-latest
