@@ -1,0 +1,22 @@
+on:
+  repository_dispatch:
+    types:
+      - traceit-deploy-test
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: qwezey/traceit
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: ${{github.event.client_payload.ref}}
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.16.0"
+          channel: "stable"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - run: npm ci
+      - run: ./scripts/deploy.ts
