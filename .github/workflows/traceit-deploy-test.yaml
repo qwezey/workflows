@@ -10,7 +10,7 @@ jobs:
         with:
           repository: qwezey/traceit
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
-          ref: ${{github.event.client_payload.ref}}
+          ref: work
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.16.0"
