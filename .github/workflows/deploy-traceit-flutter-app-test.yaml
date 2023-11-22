@@ -41,7 +41,7 @@ jobs:
           node-version: "18"
       - run: brew install fastlane
       - run: npm ci
-      - run: ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
+      - run: npx ts-node ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
         env:
           QWEZEY_BOT_TOKEN: ${{secrets.QWEZEY_BOT_TOKEN}}
           MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
