@@ -17,5 +17,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
+      - run: brew install fastlane
+      - run: npm ci
+      - run: ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: qwezey/traceit
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: work
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.16.0"
+          channel: "stable"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - run: brew install fastlane
       - run: npm ci
       - run: ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
