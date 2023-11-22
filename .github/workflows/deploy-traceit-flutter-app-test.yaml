@@ -19,8 +19,10 @@ jobs:
           node-version: "18"
       - run: brew install fastlane
       - run: npm ci
-      - run: ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
+      - run: ./scripts/deploy.ts
         env:
+          PLATFORM: android
+          BUNDLE_ID: com.qwezey.traceit.test
           QWEZEY_BOT_TOKEN: ${{secrets.QWEZEY_BOT_TOKEN}}
           MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
           APP_STORE_CONNECT_API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY}}
@@ -41,8 +43,10 @@ jobs:
           node-version: "18"
       - run: brew install fastlane
       - run: npm ci
-      - run: npx ts-node ./scripts/deploy.ts -p android -b com.qwezey.traceit.test
+      - run: npx ts-node ./scripts/deploy.ts
         env:
+          PLATFORM: ios
+          BUNDLE_ID: com.qwezey.traceit.test
           QWEZEY_BOT_TOKEN: ${{secrets.QWEZEY_BOT_TOKEN}}
           MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
           APP_STORE_CONNECT_API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY}}
