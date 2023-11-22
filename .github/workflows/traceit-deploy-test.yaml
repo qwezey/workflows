@@ -1,3 +1,4 @@
+name: "[TEST] Deploy Traceit Flutter App"
 on:
   workflow_dispatch:
 jobs:
