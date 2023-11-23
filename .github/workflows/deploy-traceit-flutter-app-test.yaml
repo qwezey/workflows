@@ -56,4 +56,4 @@ jobs:
           BUNDLE_ID: com.qwezey.traceit.test
           QWEZEY_BOT_TOKEN: ${{secrets.QWEZEY_BOT_TOKEN}}
           MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
-          APP_STORE_CONNECT_API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY}}
+          APP_STORE_CONNECT_API_KEY_JSON: ${{secrets.APP_STORE_CONNECT_API_KEY_JSON}}
