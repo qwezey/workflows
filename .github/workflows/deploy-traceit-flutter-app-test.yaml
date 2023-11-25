@@ -50,10 +50,10 @@ jobs:
       - run: bundle install
         working-directory: ios
       - run: npm ci
-      - run: npx ts-node ./scripts/deploy.ts
+      - run: npx ts-node scripts/deploy-flutter-ios-app-to-firebase.ts
         env:
-          PLATFORM: ios
-          BUNDLE_ID: com.qwezey.traceit.test
+          FLAVOR: test
+          APP_STORE_CONNECT_API_KEY_JSON: ${{secrets.APP_STORE_CONNECT_API_KEY_JSON}}
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
           QWEZEY_BOT_TOKEN: ${{secrets.QWEZEY_BOT_TOKEN}}
           MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
-          APP_STORE_CONNECT_API_KEY_JSON: ${{secrets.APP_STORE_CONNECT_API_KEY_JSON}}
