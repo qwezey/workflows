@@ -6,13 +6,13 @@ on:
         type: choice
         options:
           - dev
-      deployFirestore:
+      firestore:
         type: boolean
         default: true
-      deployStorage:
+      storage:
         type: boolean
         default: true
-      deployExtensions:
+      extensions:
         type: boolean
         default: true
 jobs:
@@ -34,7 +34,7 @@ jobs:
       - run: ./scripts/deploy-firebase-services.ts
         env:
           FLAVOR: ${{ github.event.inputs.flavor }}
-          DEPLOY_FIRESTORE: ${{ github.event.inputs.deployFirestore }}
-          DEPLOY_STORAGE: ${{ github.event.inputs.deployStorage }}
-          DEPLOY_EXTENSIONS: ${{ github.event.inputs.deployExtensions }}
+          DEPLOY_FIRESTORE: ${{ github.event.inputs.firestore }}
+          DEPLOY_STORAGE: ${{ github.event.inputs.storage }}
+          DEPLOY_EXTENSIONS: ${{ github.event.inputs.extensions }}
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
