@@ -1,4 +1,4 @@
-name: "Traceit - Deploy Flutter App"
+name: Traceit - Deploy Flutter App
 on:
   workflow_dispatch:
     inputs:

@@ -1,0 +1,40 @@
+name: Traceit - Deploy Firebase Services
+on:
+  workflow_dispatch:
+    inputs:
+      flavor:
+        type: choice
+        options:
+          - dev
+      deployFirestore:
+        type: boolean
+        default: true
+      deployStorage:
+        type: boolean
+        default: true
+      deployExtensions:
+        type: boolean
+        default: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: qwezey/traceit
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: work
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+      - run: npm ci
+
+      - run: ./scripts/deploy-firebase-services.ts
+        env:
+          FLAVOR: ${{ github.event.inputs.flavor }}
+          DEPLOY_FIRESTORE: ${{ github.event.inputs.deployFirestore }}
+          DEPLOY_STORAGE: ${{ github.event.inputs.deployStorage }}
+          DEPLOY_EXTENSIONS: ${{ github.event.inputs.deployExtensions }}
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
