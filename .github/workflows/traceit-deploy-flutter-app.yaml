@@ -9,7 +9,6 @@ on:
       flavor:
         description: The flavor (aka environment) to deploy
         type: choice
-        required: true
         options:
           - dev
 jobs:
