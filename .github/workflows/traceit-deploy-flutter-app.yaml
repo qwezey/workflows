@@ -10,7 +10,7 @@ jobs:
   deploy:
     strategy:
       matrix:
-        platform: [android]
+        platform: [android, ios]
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v4
