@@ -57,7 +57,7 @@ jobs:
           bundler-cache: true
           working-directory: ios
       - run: npm ci
-      - run: npx ts-node scripts/deploy-flutter-ios-app-to-firebase.ts
+      - run: ./scripts/deploy-flutter-ios-app-to-firebase.ts
         env:
           FLAVOR: ${{ github.event.inputs.flavor}}
           APP_STORE_CONNECT_API_KEY_JSON: ${{secrets.APP_STORE_CONNECT_API_KEY_JSON}}
