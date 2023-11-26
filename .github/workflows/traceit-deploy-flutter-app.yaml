@@ -29,7 +29,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ steps.build-env.outputs.flutterVersion }}}
+          flutter-version: ${{ steps.build-env.outputs.flutterVersion }}
           channel: stable
           cache: true
 
