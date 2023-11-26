@@ -2,7 +2,12 @@ name: Traceit - Deploy Firebase Services
 on:
   workflow_dispatch:
     inputs:
+      traceitRef:
+        description: The branch or tag to deploy
+        required: true
+        default: main
       flavor:
+        description: The flavor (aka environment) to deploy
         type: choice
         options:
           - dev
@@ -19,22 +24,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checkout the code
       - uses: actions/checkout@v4
         with:
           repository: qwezey/traceit
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
-          ref: work
+          ref: ${{github.event.inputs.traceitRef}}
 
+      # Get the build environment
+      - run: ./scripts/get-build-environment.sh
+        id: build-env
+
+      # Install node and node dependencies
       - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: ${{steps.build-env.outputs.nodeVersion}}
           cache: npm
       - run: npm ci
 
+      # Deploy the firebase services
       - run: ./scripts/deploy-firebase-services.ts
         env:
-          FLAVOR: ${{ github.event.inputs.flavor }}
-          DEPLOY_FIRESTORE: ${{ github.event.inputs.firestore }}
-          DEPLOY_STORAGE: ${{ github.event.inputs.storage }}
-          DEPLOY_EXTENSIONS: ${{ github.event.inputs.extensions }}
+          FLAVOR: ${{github.event.inputs.flavor}}
+          DEPLOY_FIRESTORE: ${{github.event.inputs.firestore}}
+          DEPLOY_STORAGE: ${{github.event.inputs.storage}}
+          DEPLOY_EXTENSIONS: ${{github.event.inputs.extensions}}
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}

@@ -2,8 +2,14 @@ name: Traceit - Deploy Flutter App
 on:
   workflow_dispatch:
     inputs:
+      traceitRef:
+        description: The branch or tag to deploy
+        required: true
+        default: main
       flavor:
+        description: The flavor (aka environment) to deploy
         type: choice
+        required: true
         options:
           - dev
 jobs:
@@ -13,32 +19,39 @@ jobs:
         platform: [android, ios]
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
+      # Checkout the code
       - uses: actions/checkout@v4
         with:
           repository: qwezey/traceit
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
-          ref: work
+          ref: ${{github.event.inputs.traceitRef}}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: npm
-      - run: npm ci
-      - run: ./scripts/get-build-environment.ts
+      # Get the build environment
+      - run: ./scripts/get-build-environment.sh
         id: build-env
 
+      # Install node and node dependencies
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{steps.build-env.outputs.nodeVersion}}
+          cache: npm
+      - run: npm ci
+
+      # Install flutter
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{steps.build-env.outputs.flutterVersion}}
           channel: stable
           cache: true
 
+      # Install ruby and fastlane dependencies
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{steps.build-env.outputs.rubyVersion}}
           bundler-cache: true
           working-directory: ${{matrix.platform}}
 
+      # deploy the app to firebase
       - run: ./scripts/deploy-flutter-${{matrix.platform}}-app-to-firebase.ts
         env:
           FLAVOR: ${{github.event.inputs.flavor}}
