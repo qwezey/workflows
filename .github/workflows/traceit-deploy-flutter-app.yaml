@@ -27,6 +27,9 @@ jobs:
       - run: ./scripts/get-build-environment.ts
         id: build-env
 
+      - run: echo ${{ steps.build-env.outputs.flutterVersion }}
+      - run: echo ${{ steps.build-env.outputs.rubyVersion }}
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ steps.build-env.outputs.flutterVersion }}}
