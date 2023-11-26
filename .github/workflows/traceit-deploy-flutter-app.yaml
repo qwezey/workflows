@@ -11,12 +11,12 @@ jobs:
     strategy:
       matrix:
         platform: [android]
-    runs-on: ${{ matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest' }}
+    runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v4
         with:
           repository: qwezey/traceit
-          token: ${{ secrets.QWEZEY_BOT_TOKEN }}
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: work
 
       - uses: actions/setup-node@v4
@@ -29,20 +29,20 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ steps.build-env.outputs.flutterVersion }}
+          flutter-version: ${{steps.build-env.outputs.flutterVersion}}
           channel: stable
           cache: true
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ steps.build-env.outputs.rubyVersion }}
+          ruby-version: ${{steps.build-env.outputs.rubyVersion}}
           bundler-cache: true
-          working-directory: ${{ matrix.platform }}
+          working-directory: ${{matrix.platform}}
 
-      - run: ./scripts/deploy-flutter-${{ matrix.platform }}-app-to-firebase.ts
+      - run: ./scripts/deploy-flutter-${{matrix.platform}}-app-to-firebase.ts
         env:
-          FLAVOR: ${{ github.event.inputs.flavor}}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APP_STORE_CONNECT_API_KEY_JSON: ${{ matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON }}
-          QWEZEY_BOT_TOKEN: ${{ matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN }}
-          MATCH_PASSWORD: ${{ matrix.platform == 'ios' && secrets.MATCH_PASSWORD }}
+          FLAVOR: ${{github.event.inputs.flavor}}
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+          APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
+          QWEZEY_BOT_TOKEN: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
+          MATCH_PASSWORD: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
