@@ -20,6 +20,9 @@ on:
       extensions:
         type: boolean
         default: true
+      functions:
+        type: boolean
+        default: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -49,4 +52,5 @@ jobs:
           DEPLOY_FIRESTORE: ${{github.event.inputs.firestore}}
           DEPLOY_STORAGE: ${{github.event.inputs.storage}}
           DEPLOY_EXTENSIONS: ${{github.event.inputs.extensions}}
+          DEPLOY_FUNCTIONS: ${{github.event.inputs.functions}}
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
