@@ -11,6 +11,7 @@ on:
         type: choice
         options:
           - dev
+          - qa
 jobs:
   deploy:
     strategy:
