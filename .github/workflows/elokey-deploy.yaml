@@ -1,0 +1,23 @@
+on:
+  repository_dispatch:
+    types:
+      - elokey-deploy
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        platform:
+          - ios
+          - android
+    runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: qwezey/elokey
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: ${{github.event.client_payload.ref}}
+      - run: ./scripts/deploy.ts --platform ${{matrix.platform}}
+        env:
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+          APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
+          MATCH_PASSWORD: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
