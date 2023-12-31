@@ -16,6 +16,7 @@ jobs:
           repository: qwezey/elokey
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
+      - uses: ./.github/actions/setup-deploy
       - run: ./scripts/deploy.ts --platform ${{matrix.platform}}
         env:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
