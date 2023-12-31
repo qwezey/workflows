@@ -16,7 +16,11 @@ jobs:
           repository: qwezey/elokey
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
-      - uses: ./.github/actions/setup-deploy
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/setup-flutter
+      - uses: ./.github/actions/setup-fastlane
+        with:
+          platform: ${{matrix.platform}}
       - run: ./scripts/deploy.ts --platform ${{matrix.platform}}
         env:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
