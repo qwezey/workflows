@@ -27,3 +27,4 @@ jobs:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
           APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
           MATCH_PASSWORD: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
+          QWEZEY_BOT_TOKEN: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
