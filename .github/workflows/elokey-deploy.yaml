@@ -9,6 +9,7 @@ jobs:
         platform:
           - ios
           - android
+          - web-admin
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +22,7 @@ jobs:
         if: ${{matrix.platform == 'android'}}
       - uses: ./.github/actions/setup-flutter
       - uses: ./.github/actions/setup-fastlane
+        if: ${{matrix.platform != 'web-admin'}}
         with:
           platform: ${{matrix.platform}}
       - run: ./scripts/deploy.ts
