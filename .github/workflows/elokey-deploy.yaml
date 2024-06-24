@@ -35,4 +35,5 @@ jobs:
           APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
           APP_STORE_CONNECT_AZIZ_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}
           MATCH_PASSWORD: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
+          MATCH_PASSWORD_ELOKEY: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD_ELOKEY}}
           QWEZEY_BOT_TOKEN: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
