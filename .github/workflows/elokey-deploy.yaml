@@ -27,13 +27,21 @@ jobs:
         if: ${{matrix.platform != 'web-admin'}}
         with:
           platform: ${{matrix.platform}}
+
       - run: ./scripts/deploy.ts
         env:
           PLATFORM: ${{matrix.platform}}
           ENVIRONMENT: ${{github.event.client_payload.environment}}
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
-          APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
-          APP_STORE_CONNECT_AZIZ_API_KEY_JSON: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}
-          MATCH_PASSWORD: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
-          MATCH_PASSWORD_ELOKEY: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD_ELOKEY}}
+
           QWEZEY_BOT_TOKEN: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
+
+          APP_STORE_CONNECT_API_KEY_JSON: ${{matrix.platform == 'ios' && env.ENVIRONMENT != 'prod' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
+          MATCH_PASSWORD: ${{matrix.platform == 'ios' && env.ENVIRONMENT != 'prod' && secrets.MATCH_PASSWORD}}
+
+          APP_STORE_CONNECT_AZIZ_API_KEY_JSON: ${{matrix.platform == 'ios' && env.ENVIRONMENT == 'prod' && secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}
+          MATCH_PASSWORD_ELOKEY: ${{matrix.platform == 'ios' && env.ENVIRONMENT == 'prod' && secrets.MATCH_PASSWORD_ELOKEY}}
+
+          GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT: ${{matrix.platform == 'android' && env.ENVIRONMENT == 'prod' && secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
+          GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64: ${{matrix.platform == 'android' && env.ENVIRONMENT == 'prod' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64}}
+          GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES: ${{matrix.platform == 'android' && env.ENVIRONMENT == 'prod' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES}}
