@@ -22,8 +22,6 @@ jobs:
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
       - uses: ./.github/actions/setup-node
-      - uses: ./.github/actions/setup-firebase-tools
-        if: ${{matrix.platform == 'web-admin'}}
       - uses: ./.github/actions/setup-java
         if: ${{matrix.platform == 'android'}}
       - uses: ./.github/actions/setup-flutter
