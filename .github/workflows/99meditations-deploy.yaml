@@ -22,3 +22,5 @@ jobs:
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
       - uses: ./.github/actions/scripts
+        env:
+          action: deploy
