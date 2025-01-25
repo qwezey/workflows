@@ -1,0 +1,24 @@
+on:
+  repository_dispatch:
+    types:
+      - 99meditations-deploy
+
+env:
+  APP_ENV: ${{github.event.client_payload.environment}}
+
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        platform:
+          - ios
+          - android
+          - web
+    runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: qwezey/99meditations
+          token: ${{secrets.QWEZEY_BOT_TOKEN}}
+          ref: ${{github.event.client_payload.ref}}
+      - uses: ./.github/actions/scripts
