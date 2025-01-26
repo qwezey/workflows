@@ -21,6 +21,7 @@ jobs:
           repository: qwezey/99meditations
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
+      - uses: ./.github/actions/setup-flutter
       - uses: ./.github/actions/scripts
         env:
           action: deploy
