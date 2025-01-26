@@ -26,3 +26,4 @@ jobs:
         env:
           action: deploy
           platform: ${{matrix.platform}}
+          environment: ${{env.APP_ENV}}
