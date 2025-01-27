@@ -22,6 +22,9 @@ jobs:
           token: ${{secrets.QWEZEY_BOT_TOKEN}}
           ref: ${{github.event.client_payload.ref}}
       - uses: ./.github/actions/setup-flutter
+      - uses: ./.github/actions/setup-firebase-tools
+      - uses: ./.github/actions/setup-fastlane
+        if: ${{matrix.platform == 'ios'}}
       - uses: ./.github/actions/scripts
         env:
           action: deploy
