@@ -27,3 +27,7 @@ jobs:
           action: deploy
           platform: ${{matrix.platform}}
           environment: ${{env.APP_ENV}}
+          firebaseToken: ${{secrets.FIREBASE_TOKEN}}
+          qwezeyBotToken: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
+          appStoreConnectApiKeyJson: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
+          matchPassword: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
