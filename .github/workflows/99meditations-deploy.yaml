@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         platform:
-          - ios
+          # - ios
           - android
-          - web
+          # - web
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
       - uses: ./.github/actions/setup-flutter
       - uses: ./.github/actions/setup-firebase-tools
       - uses: ./.github/actions/setup-fastlane
-        if: ${{matrix.platform == 'ios'}}
+        if: ${{matrix.platform == 'ios' || matrix.platform == 'android'}}
       - uses: ./.github/actions/scripts
         env:
           action: deploy
@@ -34,5 +34,6 @@ jobs:
           qwezeyBotToken: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
           appStoreConnectApiKeyJson: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
           matchPassword: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
+          googlePlayConsoleServiceAccount: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
           googlePlayUploadKeystoreBase64: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64}}
           googlePlayUploadKeystoreProperties: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES}}
