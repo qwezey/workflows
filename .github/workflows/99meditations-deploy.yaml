@@ -34,6 +34,6 @@ jobs:
           qwezeyBotToken: ${{matrix.platform == 'ios' && secrets.QWEZEY_BOT_TOKEN}}
           appStoreConnectApiKeyJson: ${{matrix.platform == 'ios' && secrets.APP_STORE_CONNECT_API_KEY_JSON}}
           matchPassword: ${{matrix.platform == 'ios' && secrets.MATCH_PASSWORD}}
-          googlePlayConsoleServiceAccount: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
           googlePlayUploadKeystoreBase64: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64}}
           googlePlayUploadKeystoreProperties: ${{matrix.platform == 'android' && secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES}}
+          FIREBASE_APP_CHECK_DEBUG_TOKEN: ${{matrix.platform == 'android' && secrets.NINETY_NINE_FIREBASE_APP_CHECK_DEBUG_TOKEN}}
