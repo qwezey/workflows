@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         platform:
-          # - ios
+          - ios
           - android
-          # - web
+          - web
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v4
