@@ -7,11 +7,17 @@ on:
         type: string
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - ios
+          - android
+    runs-on: ${{ matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v5
         with:
           repository: qwezey/lease-tracker
           ref: ${{ inputs.ref }}
           token: ${{ secrets.QWEZEY_BOT_TOKEN }}
-      - run: ls -al
+      - uses: actions/setup-node@v6
+      - run: npm run prod-build-${{ matrix.platform }}
