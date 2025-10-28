@@ -13,6 +13,8 @@ jobs:
         platform:
           - ios
           - android
+    env:
+      BUILD_PATH: build.${{ matrix.platform == 'ios' && 'ipa' || 'aab'}}
     runs-on: ${{ matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
       - uses: actions/checkout@v5
@@ -24,6 +26,9 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npm run build -- --non-interactive --platform ${{ matrix.platform }} --auto-submit
+      - run: npm run build -- --non-interactive --platform ${{ matrix.platform }} --output ${{ env.BUILD_PATH }}
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}
+      - run: npm run eas -- submit --non-interactive --platform ${{ matrix.platform }} --path ${{ env.BUILD_PATH }}
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}
