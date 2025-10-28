@@ -1,0 +1,14 @@
+on:
+  repository_dispatch:
+    types:
+      - lease-tracker-deploy
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: qwezey/lease-tracker
+          ref: expo
+          token: ${{ secrets.QWEZEY_BOT_TOKEN }}
+      - run: ls -al
