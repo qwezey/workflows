@@ -1,7 +1,10 @@
 on:
-  repository_dispatch:
-    types:
-      - lease-tracker-deploy
+  workflow_dispatch:
+    inputs:
+      ref:
+        default: expo
+        description: ref of lease-tracker repo
+        type: string
 jobs:
   deploy:
     runs-on: ubuntu-latest
