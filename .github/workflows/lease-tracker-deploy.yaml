@@ -21,6 +21,7 @@ jobs:
           ref: ${{ inputs.ref }}
           token: ${{ secrets.QWEZEY_BOT_TOKEN }}
       - uses: actions/setup-node@v6
+      - run: npm ci
       - run: npm run prod-build-${{ matrix.platform }}
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}
