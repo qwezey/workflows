@@ -23,6 +23,6 @@ jobs:
           token: ${{ secrets.QWEZEY_BOT_TOKEN }}
       - run: brew install bitrise
       - run: bitrise run deploy
-        env:
-          BITRISE_BUILD_API_TOKEN: ${{ secrets.BITRISE_PAT }}
-          BITRISE_BUILD_URL: https://app.bitrise.io/app/27972117-b61e-4c86-9fb1-41f62800f72b
+        # env:
+        #   BITRISE_BUILD_API_TOKEN: ${{ secrets.BITRISE_PAT }}
+        #   BITRISE_BUILD_URL: https://app.bitrise.io/app/27972117-b61e-4c86-9fb1-41f62800f72b
