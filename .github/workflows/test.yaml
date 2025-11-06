@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        default: update-deps
+        description: ref of elokey repo
+        type: string
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        platform:
+          - ios
+    runs-on: ${{ matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: qwezey/elokey
+          ref: ${{ inputs.ref }}
+          token: ${{ secrets.QWEZEY_BOT_TOKEN }}
+      - run: brew install bitrise
+      - run: bitrise run deploy
