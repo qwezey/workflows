@@ -13,6 +13,7 @@ jobs:
           - ios
     runs-on: ${{ matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
+      - run: go --version
       - uses: actions/checkout@v5
         with:
           repository: qwezey/elokey
