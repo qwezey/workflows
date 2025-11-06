@@ -20,3 +20,5 @@ jobs:
           token: ${{ secrets.QWEZEY_BOT_TOKEN }}
       - run: brew install bitrise
       - run: bitrise run deploy
+        env:
+          BITRISE_ACCESS_TOKEN: ${{ secrets.BITRISE_PAT }}
