@@ -16,9 +16,11 @@ jobs:
           # - web-admin
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
-      - run: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      - run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew --version
         if: ${{matrix.platform == 'android'}}
-      - run: brew --version
+      # - run: brew --version
       # - uses: actions/checkout@v5
       #   with:
       #     repository: qwezey/elokey
