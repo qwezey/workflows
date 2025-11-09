@@ -34,7 +34,7 @@ jobs:
       # - run: flutter build ios --no-codesign
       - run: echo ${{secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}} > apple-api-key.json
       - run: |
-          echo "::add-mask::$(echo ${{secrets.QWEZEY_BOT_TOKEN}} | base64)"
+          echo "::add-mask::$(echo ${{secrets.QWEZEY_BOT_TOKEN}} | base64)" &&
           fastlane run match \
             api_key_path:../apple-api-key.json \
             git_basic_authorization:$(echo ${{secrets.QWEZEY_BOT_TOKEN}} | base64) \
