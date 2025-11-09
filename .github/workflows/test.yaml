@@ -16,6 +16,7 @@ jobs:
           # - web-admin
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
+      - uses: Homebrew/actions/setup-homebrew@main
       - run: brew --version
       # - uses: actions/checkout@v5
       #   with:
