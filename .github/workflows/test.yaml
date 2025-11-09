@@ -16,7 +16,8 @@ jobs:
           # - web-admin
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
-      - uses: Homebrew/actions/setup-homebrew@main
+      - run: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        if: ${{matrix.platform == 'android'}}
       - run: brew --version
       # - uses: actions/checkout@v5
       #   with:
