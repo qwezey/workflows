@@ -19,7 +19,6 @@ jobs:
       - run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew --version
-        if: ${{matrix.platform == 'android'}}
       # - run: brew --version
       # - uses: actions/checkout@v5
       #   with:
