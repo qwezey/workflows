@@ -5,6 +5,15 @@ on:
         default: update-deps
         description: ref of elokey repo
         type: string
+      env:
+        description: env
+        default: test
+        type: choice
+        options:
+          - test
+
+env:
+  APP_STORE_CONNECT_API_KEY_JSON: ${{inputs.env == 'test' && secrets.APP_STORE_CONNECT_API_KEY_JSON || secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}
 
 jobs:
   deploy:
@@ -32,7 +41,7 @@ jobs:
       - run: brew install fastlane
         if: ${{matrix.platform != 'web-admin'}}
       # - run: flutter build ios --no-codesign
-      - run: echo -n '${{secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}' > apple-api-key.json
+      - run: echo -n '${{env.APP_STORE_CONNECT_API_KEY_JSON}}' > apple-api-key.json
       - run: |
           echo "::add-mask::$(echo -n qwezey-bot:${{secrets.QWEZEY_BOT_TOKEN}} | base64)" &&
           fastlane run match \
