@@ -6,7 +6,7 @@ on:
         description: ref of elokey repo
         type: string
       env:
-        description: env
+        description: elokey environment
         default: test
         type: choice
         options:
