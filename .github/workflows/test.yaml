@@ -48,3 +48,9 @@ jobs:
           googlePlayConsoleServiceAccount: ${{secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
           googlePlayUploadKeystoreBase64: ${{secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64}}
           googlePlayUploadKeystoreProperties: ${{secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES}}
+
+      # Temporary artifact upload for Android AAB
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
