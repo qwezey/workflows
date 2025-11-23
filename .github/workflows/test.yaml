@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         platform:
-          - ios
-          # - android
+          # - ios
+          - android
           # - web-admin
     runs-on: ${{matrix.platform == 'ios' && 'macos-latest' || 'ubuntu-latest'}}
     steps:
@@ -45,3 +45,6 @@ jobs:
           appStoreConnectApiKeyJson: ${{secrets.APP_STORE_CONNECT_API_KEY_JSON}}
           appStoreConnectAzizApiKeyJson: ${{secrets.APP_STORE_CONNECT_AZIZ_API_KEY_JSON}}
           matchPasswordElokey: ${{secrets.MATCH_PASSWORD_ELOKEY}}
+          googlePlayConsoleServiceAccount: ${{secrets.GOOGLE_PLAY_CONSOLE_SERVICE_ACCOUNT}}
+          googlePlayUploadKeystoreBase64: ${{secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64}}
+          googlePlayUploadKeystoreProperties: ${{secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PROPERTIES}}
